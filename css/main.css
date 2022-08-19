@@ -990,6 +990,12 @@ p {
   .catalog-item .book-author {
     font-size: 13px; } }
 
+@media (min-width: 992px) {
+  .catalog-item .book-title {
+    font-size: 16px; }
+  .catalog-item .book-author {
+    font-size: 14px; } }
+
 .cover-holder {
   padding: 30px 0;
   position: relative;

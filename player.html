@@ -1,0 +1,341 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Bookway - switch between listening and reading across your devices</title>
+
+		<link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+		<link rel="stylesheet" href="css/main.css">
+	</head>
+
+	<body>
+		<div id="wrapper">
+		  	<div class="container player-container">
+			    <div class="head-navigation">
+			      	<a href="book.html" class="back-link">
+			        	<svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1.00001 7L14.7143 7M7.00001 1L1.00001 7L7.00001 13" stroke="#343434" stroke-width="1.71429" stroke-linecap="round" stroke-linejoin="round"/></svg>
+
+			        	<span>Book page</span>
+			      	</a>
+			    </div>
+
+			    <div class="cover-holder">
+			      	<img src="img/book-5.jpg" alt="book" class="cover-background">
+
+			      	<div class="img-holder">
+				        <img src="img/book-5.jpg" alt="book">
+			      	</div>
+			    </div>
+
+			    <div class="descr-holder">
+			      	<h1>Alice in Wonderland</h1>
+			      
+			      	<div class="book-author"><a href="">Lewis Carroll</a></div>
+			    </div>
+
+			    <div class="player-holder">
+		      		<audio id="audio-play" ontimeupdate="onTimeUpdate()">
+			        	<!-- <source src="audio.ogg" type="audio/ogg"> -->
+			        	<source id="source-audio" src="" type="audio/mpeg">
+			        	Your browser does not support the audio element.
+			      	</audio>
+
+			      	<div class="player-ctn">
+				        <div class="player-head">
+				          	<div class="track-time">00:00</div>
+				          	<div class="track-title"></div>
+				          	<div class="track-duration">00:00</div>
+				        </div>
+			        
+				        <div id="player-progress">
+				          <div id="progress-rail"></div>
+				        </div>
+
+				        <div class="player-controls">
+				          	<!-- <div class="btn-action first-btn" onclick="previous()">
+					            <div id="btn-faws-back"></div>
+					          </div>
+					           
+					          <div class="btn-action" onclick="rewind()">
+					              <div id="btn-faws-rewind"></div>
+				          	</div> -->
+
+				          	<div class="btn-action play-btn" onclick="toggleAudio()">
+					            <div id="play-toggle">
+					              	<svg width="35" height="39" viewBox="0 0 35 39" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_73_579)"><path d="M33 16.0359C35.6667 17.5755 35.6667 21.4245 33 22.9641L6.75001 38.1195C4.08334 39.6591 0.750002 37.7346 0.750002 34.6554L0.750003 4.34456C0.750003 1.26536 4.08334 -0.659147 6.75 0.880454L33 16.0359Z" fill="white"/></g><defs><clipPath id="clip0_73_579"><rect width="35" height="39" fill="white"/></clipPath></defs></svg>
+
+					            </div>
+
+					            <div id="pause-toggle" style="display: none;">
+					              	<svg width="33" height="38" viewBox="0 0 33 38" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 0C0.895431 0 0 0.89543 0 2V36C0 37.1046 0.89543 38 2 38H11C12.1046 38 13 37.1046 13 36V2C13 0.895431 12.1046 0 11 0H2ZM22 0C20.8954 0 20 0.89543 20 2V36C20 37.1046 20.8954 38 22 38H31C32.1046 38 33 37.1046 33 36V2C33 0.895431 32.1046 0 31 0H22Z" fill="white"/></svg>
+
+					            </div>
+				          	</div>
+
+					          <!-- <div class="btn-play" onclick="forward()">
+					              <div id="btn-faws-forward"></div>
+					          </div>
+
+					          <div class="btn-action" onclick="next()">
+					              <div id="btn-faws-next">
+					                <i class='fas fa-step-forward'></i>
+					              </div>
+					          </div>
+
+					          <div class="btn-mute" id="toggleMute" onclick="toggleMute()">
+					            <div id="btn-faws-volume"></div>
+					          </div> -->
+				        </div>
+
+			        	<div class="playlist-holder"></div>
+			      	</div>
+			    </div>
+		  	</div>
+		</div>
+
+		<script>
+		  	function createTrackItem(index,name,duration){
+			    var trackItem = document.createElement('div');
+			    trackItem.setAttribute("class", "playlist-track-ctn");
+			    trackItem.setAttribute("id", "ptc-"+index);
+			    trackItem.setAttribute("data-index", index);
+			    document.querySelector(".playlist-holder").appendChild(trackItem);
+
+			    var playBtnItem = document.createElement('div');
+			    playBtnItem.setAttribute("class", "playlist-btn-play");
+			    playBtnItem.setAttribute("id", "pbp-"+index);
+			    document.querySelector("#ptc-"+index).appendChild(playBtnItem);
+
+			    var btnImg = document.createElement('i');
+			    btnImg.setAttribute("class", "fas fa-play");
+			    btnImg.setAttribute("height", "40");
+			    btnImg.setAttribute("width", "40");
+			    btnImg.setAttribute("id", "p-img-"+index);
+			    document.querySelector("#pbp-"+index).appendChild(btnImg);
+
+			    var trackInfoItem = document.createElement('div');
+			    trackInfoItem.setAttribute("class", "playlist-info-track");
+			    trackInfoItem.innerHTML = name
+			    document.querySelector("#ptc-"+index).appendChild(trackInfoItem);
+
+			    var trackDurationItem = document.createElement('div');
+			    trackDurationItem.setAttribute("class", "playlist-duration");
+			    trackDurationItem.innerHTML = duration
+			    document.querySelector("#ptc-"+index).appendChild(trackDurationItem);
+		  	}
+
+		  	var listAudio = [
+			    {
+			      name:"Alice in Wonderland",
+			      file:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-10.mp3",
+			      duration:"08:47"
+			    },
+			    {
+			      name:"Artist 2 - audio 2",
+			      file:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3",
+			      duration:"05:53"
+			    },
+			    {
+			      name:"Artist 3 - audio 3",
+			      file:"https://file-examples.com/wp-content/uploads/2017/11/file_example_MP3_1MG.mp3",
+			      duration:"00:27"
+			    }
+		  	]
+
+			for (var i = 0; i < listAudio.length; i++) {
+		    	createTrackItem(i,listAudio[i].name,listAudio[i].duration);
+			}
+
+		  	var indexAudio = 0;
+
+		  	function loadNewTrack(index){
+			    var player = document.querySelector('#source-audio')
+			    player.src = listAudio[index].file
+			    document.querySelector('.track-title').innerHTML = listAudio[index].name
+			    this.currentAudio = document.getElementById("audio-play");
+			    this.currentAudio.load()
+			    this.toggleAudio()
+			    this.updateStylePlaylist(this.indexAudio,index)
+			    this.indexAudio = index;
+		  	}
+
+		  	var playListItems = document.querySelectorAll(".playlist-track-ctn");
+
+		  	for (let i = 0; i < playListItems.length; i++){
+		    	playListItems[i].addEventListener("click", getClickedElement.bind(this));
+		  	}
+
+		  	function getClickedElement(event) {
+			    for (let i = 0; i < playListItems.length; i++){
+			      	if(playListItems[i] == event.target){
+			        	var clickedIndex = event.target.getAttribute("data-index")
+			        	if (clickedIndex == this.indexAudio ) { // alert('Same audio');
+			            this.toggleAudio()
+		        		} else{
+			            	loadNewTrack(clickedIndex);
+			        	}
+			      	}	
+			    }
+		  	}
+
+		  	document.querySelector('#source-audio').src = listAudio[indexAudio].file
+		  	document.querySelector('.track-title').innerHTML = listAudio[indexAudio].name
+
+			var currentAudio = document.getElementById("audio-play");
+
+		  	currentAudio.load()
+		  
+		  	currentAudio.onloadedmetadata = function() {
+		        document.getElementsByClassName('track-duration')[0].innerHTML = this.getMinutes(this.currentAudio.duration)
+		  	}.bind(this);
+
+		  	var interval1;
+
+		  	function toggleAudio() {
+			    if (this.currentAudio.paused) {
+					document.querySelector('#play-toggle').style.display = 'none';
+					document.querySelector('#pause-toggle').style.display = 'flex';
+					document.querySelector('#ptc-'+this.indexAudio).classList.add("active-track");
+					this.playToPause(this.indexAudio)
+					this.currentAudio.play();
+			    }else{
+			      	document.querySelector('#play-toggle').style.display = 'flex';
+			      	document.querySelector('#pause-toggle').style.display = 'none';
+			      	this.pauseToPlay(this.indexAudio)
+			      	this.currentAudio.pause();
+			    }
+		  	}
+
+		  	function pauseAudio() {
+		    	this.currentAudio.pause();
+		    	clearInterval(interval1);
+		  	}
+
+		  	var timer = document.getElementsByClassName('track-time')[0]
+
+		  	var barProgress = document.getElementById("progress-rail");
+
+
+		  	var width = 0;
+
+		  	function onTimeUpdate() {
+			    var t = this.currentAudio.currentTime
+			    timer.innerHTML = this.getMinutes(t);
+			    this.setBarProgress();
+			    if (this.currentAudio.ended) {
+			     	document.querySelector('#play-toggle').style.display = 'block';
+			      	document.querySelector('#pause-toggle').style.display = 'none';
+			     	this.pauseToPlay(this.indexAudio)
+
+			      	if (this.indexAudio < listAudio.length-1) {
+			          	var index = parseInt(this.indexAudio)+1
+			          	this.loadNewTrack(index)
+			      	}
+			    }
+		  	}
+
+		  	function setBarProgress(){
+		    	var progress = (this.currentAudio.currentTime/this.currentAudio.duration)*100;
+		    	document.getElementById("progress-rail").style.width = progress + "%";
+		  	}
+
+
+		  	function getMinutes(t){
+		    	var min = parseInt(parseInt(t)/60);
+		    	var sec = parseInt(t%60);
+		    	if (sec < 10) {
+		      	sec = "0"+sec
+		    }
+			    if (min < 10) {
+			      min = "0"+min
+			    }
+			    return min+":"+sec
+		  	}
+
+		  	var progressbar = document.querySelector('#player-progress')
+		  	progressbar.addEventListener("click", seek.bind(this));
+
+
+		  	function seek(event) {
+		    	var percent = event.offsetX / progressbar.offsetWidth;
+		    	this.currentAudio.currentTime = percent * this.currentAudio.duration;
+		    	barProgress.style.width = percent*100 + "%";
+		  	}
+
+		  	function forward(){
+		    	this.currentAudio.currentTime = this.currentAudio.currentTime + 5
+		    	this.setBarProgress();
+		  	}
+
+		  	function rewind(){
+		    	this.currentAudio.currentTime = this.currentAudio.currentTime - 5
+		    	this.setBarProgress();
+		  	}
+
+		  	function next(){
+		    	if (this.indexAudio <listAudio.length-1) {
+			        var oldIndex = this.indexAudio
+			        this.indexAudio++;
+			        updateStylePlaylist(oldIndex,this.indexAudio)
+			        this.loadNewTrack(this.indexAudio);
+		   	 	}
+		  	}
+
+		  	function previous(){
+		    	if (this.indexAudio>0) {
+			        var oldIndex = this.indexAudio
+			        this.indexAudio--;
+			        updateStylePlaylist(oldIndex,this.indexAudio)
+			        this.loadNewTrack(this.indexAudio);
+		    	}
+		  	}
+
+		  	function updateStylePlaylist(oldIndex,newIndex){
+		    	document.querySelector('#ptc-'+oldIndex).classList.remove("active-track");
+		    	this.pauseToPlay(oldIndex);
+		    	document.querySelector('#ptc-'+newIndex).classList.add("active-track");
+		    	this.playToPause(newIndex)
+		  	}
+
+		  	function playToPause(index){
+		    	var ele = document.querySelector('#p-img-'+index)
+		    	ele.classList.remove("fa-play");
+		    	ele.classList.add("fa-pause");
+		  	}
+
+		  	function pauseToPlay(index){
+		    	var ele = document.querySelector('#p-img-'+index)
+		    	ele.classList.remove("fa-pause");
+		    	ele.classList.add("fa-play");
+		  	}
+
+
+		  	function toggleMute(){
+			    var btnMute = document.querySelector('#toggleMute');
+			    var volUp = document.querySelector('#icon-vol-up');
+			    var volMute = document.querySelector('#icon-vol-mute');
+			    if (this.currentAudio.muted == false) {
+			       	this.currentAudio.muted = true
+			       	volUp.style.display = "none"
+			       	volMute.style.display = "block"
+			    }else{
+			      	this.currentAudio.muted = false
+			      	volMute.style.display = "none"
+			      	volUp.style.display = "block"
+			    }
+		  	}
+		</script>
+
+		<script src="js/main.js"></script>
+	</body>
+</html>

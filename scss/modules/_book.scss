@@ -1,0 +1,71 @@
+.book-container {
+	padding-bottom: 60px;
+
+	.img-holder {
+		img {
+			display: block;
+			max-width: 100%;
+			border-radius: 5px;
+		}
+	}
+
+	.descr-holder {
+		margin-top: -5px;
+		padding-left: 5px;
+
+		h1, .h1 {
+			margin: 0 0 3px;
+			font-size: 24px;
+			line-height: 1.2;
+		}
+	}
+
+	.book-author {
+		a {
+			text-decoration: none;
+			font-size: 18px;
+			color: #676767;
+		}
+	}
+
+	.read-btn {
+		border-color: #fc5d28;
+		background-color: #fc5d28;
+	}
+}
+
+@media(min-width: 576px) {
+	.book-container {
+		.descr-holder {
+			h1, .h1 {
+				font-size: 32px;
+			}
+		}
+	}
+}
+
+@media(min-width: 768px) {
+	.book-container {
+		.img-holder {
+			img {
+				border-radius: 10px;
+			}
+		}
+
+		.descr-holder {
+			padding-left: 15px;
+
+			h1, .h1 {
+				font-size: 36px;
+			}
+		}
+	}
+}
+
+
+
+
+
+
+
+

@@ -1,0 +1,47 @@
+.footer-navigation {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: #EDF0F3;
+	padding: 7px 0 4px;
+	z-index: 100;
+	border-top: 1px solid #DADCE0;
+
+	.container {
+		display: flex;
+		justify-content: space-around;
+	}
+
+	a {
+		color: #212121;
+		text-decoration: none;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-end;
+
+
+		&.active {
+			color: #0D6EFD;
+
+			svg {
+				fill: #0D6EFD;
+			}
+		}
+
+		&.disabled {
+			pointer-events: none;
+			// color: #999;
+
+			svg {
+				// fill: #999;
+			}
+		}
+	}
+
+	svg {
+		fill: #212121;
+		margin-bottom: 3px;
+	}
+}

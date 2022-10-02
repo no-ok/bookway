@@ -342,10 +342,6 @@ p {
   justify-content: space-between;
   margin-bottom: 25px;
   margin-top: 25px; }
-  .btn-group .btn-outline,
-  .btn-group .btn-primary {
-    width: calc(50% - 8px);
-    font-size: 18px; }
 
 .btn-outline {
   display: flex;
@@ -360,10 +356,6 @@ p {
   text-decoration: none;
   color: #0D6EFD;
   padding: 10px 5px; }
-  .btn-outline svg {
-    margin-right: 8px;
-    transition: .25s;
-    fill: #0D6EFD; }
   .btn-outline:hover, .btn-outline:focus {
     background-color: #0D6EFD;
     color: #fff; }
@@ -378,18 +370,10 @@ p {
   cursor: pointer;
   transition: .25s;
   border: 1px solid #0D6EFD;
-  border-radius: 40px;
   width: 100%;
   text-decoration: none;
   color: #fff;
   padding: 10px 5px; }
-  .btn-primary svg {
-    margin-right: 8px;
-    transition: .25s;
-    fill: #fff; }
-  .btn-primary.listen-btn {
-    border: 1px solid #0D6EFD;
-    background-color: #0D6EFD; }
 
 .index-page .slider-holder {
   position: relative; }
@@ -1125,20 +1109,62 @@ p {
     display: block;
     max-width: 100%;
     border-radius: 5px; }
+  .book-container .btn-group {
+    position: fixed;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: calc(100% - 30px);
+    display: flex;
+    box-shadow: 0px 3px 15px rgba(19, 19, 20, 0.4);
+    overflow: hidden;
+    border-radius: 50px; }
+    .book-container .btn-group:after {
+      content: '';
+      width: 1px;
+      height: 32px;
+      background-color: #fff;
+      position: absolute;
+      pointer-events: none;
+      top: 10px;
+      left: 0;
+      right: 0;
+      margin: 0 auto; }
+    .book-container .btn-group a {
+      width: 50%;
+      height: 52px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #0D6EFD;
+      color: #fff;
+      font-size: 18px;
+      text-decoration: none;
+      transition: all 0.25s ease; }
+      .book-container .btn-group a svg {
+        margin-right: 12px;
+        transition: .25s;
+        fill: #fff; }
+      .book-container .btn-group a:hover, .book-container .btn-group a:focus {
+        background-color: #185bc0; }
   .book-container .descr-holder {
     margin-top: -5px;
     padding-left: 5px; }
     .book-container .descr-holder h1, .book-container .descr-holder .h1 {
       margin: 0 0 3px;
-      font-size: 24px;
+      font-size: 20px;
       line-height: 1.2; }
   .book-container .book-author a {
     text-decoration: none;
     font-size: 18px;
     color: #676767; }
-  .book-container .read-btn {
-    border-color: #fca828;
-    background-color: #fca828; }
+  .book-container .tab-container {
+    margin-top: 20px; }
+
+@media (min-width: 375px) {
+  .book-container .descr-holder h1, .book-container .descr-holder .h1 {
+    font-size: 24px; } }
 
 @media (min-width: 576px) {
   .book-container .descr-holder h1, .book-container .descr-holder .h1 {
@@ -1150,7 +1176,17 @@ p {
   .book-container .descr-holder {
     padding-left: 15px; }
     .book-container .descr-holder h1, .book-container .descr-holder .h1 {
-      font-size: 36px; } }
+      font-size: 36px; }
+  .book-container .tabs button {
+    font-size: 18px; } }
+
+@media (min-width: 992px) {
+  .book-container .btn-group {
+    bottom: 50px;
+    width: 972px; }
+  .book-container .tabs button {
+    font-size: 20px;
+    font-weight: 500; } }
 
 .text-container {
   padding-bottom: 50px; }
